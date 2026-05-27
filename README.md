@@ -50,24 +50,9 @@
     ```sh
     TOMATO_WEB_PASSWORD=你的密码
     ```
+   
 
-- 数据目录（用于 Docker 部署或集中管理配置/日志）：
-
-    通过 `--data-dir` 参数指定数据目录，程序会将 `config.yml` 和 `logs` 文件夹放在该目录下：
-
-    ```sh
-    Tomato-Novel-Downloader.exe --server --data-dir /data
-    ```
-
-    Docker 使用示例：
-
-    ```sh
-    docker run -v /host/data:/data my-tomato-image --server --data-dir /data
-    ```
-
-    这样可以方便地挂载数据目录，实现配置和日志的持久化。
-
-Web UI 提供的功能（纯 HTML，无需额外前端构建）：
+**Web UI 提供的功能（纯 HTML，无需额外前端构建）：**
 
 - 搜索书籍并创建下载任务
 - 任务列表/进度刷新/取消任务
@@ -79,67 +64,20 @@ Web UI 提供的功能（纯 HTML，无需额外前端构建）：
 注意：Web UI 主要面向自建/局域网使用；如果要暴露到公网，建议放在反向代理/HTTPS 后面，并务必开启密码锁。
 
 ---
-
-
-## 构建模式（Cargo Features）
-
-本项目提供两个互斥的 feature：`official-api` 与 `no-official-api`（两者不能同时启用）。
-
-### 默认模式：official-api（默认启用）
-
-- 构建（默认就会启用）：
-
-```sh
-cargo build --release
-```
-
-- 行为：
-  - 搜索功能可用（TUI / Web UI / 老 CLI 的搜索入口）。
-  - 段评（EPUB 段评页/资源抓取）可用（取决于配置项）。
-  - 正文获取可通过配置在“官方/第三方”之间切换（`use_official_api`）。
-
-### No-Official-API 模式：no-official-api（Issue #187）
-
-- 构建：
-
-```sh
-# Linux/macOS
-cp Cargo_no_official.toml Cargo.toml
-cargo build --release
-
-# Windows
-copy /Y Cargo_no_official.toml Cargo.toml
-cargo build --release
-```
-
-仓库根目录提供了 `Cargo_no_official.toml`，该文件**完全不引用** `tomato-novel-official-api` 路径依赖，适合无法获取该 crate 的用户直接使用。
-
-- 行为差异（重点）：
-  - **不依赖** `tomato-novel-official-api` crate，可在缺少 Official-API 环境时编译。
-  - 目录与书本信息：使用网页解析（`FanqieWebNetwork`）。
-  - **正文获取：强制第三方模式**（忽略/不使用 `use_official_api=true` 的官方分支）。
-  - 搜索功能：不可用（会返回提示/报错）。
-  - 段评：不可用（会被强制关闭）。
-
----
-
-**手机端仅限安卓设备（Termux）**可以运行。**
+**手机端仅限安卓设备（Termux）**
     
-
-    另外：如果你希望在 TUI 中使用 `Ctrl+V` 从系统剪贴板粘贴，需要安装 Termux API：
-
-    - 安装 App：Termux:API
-    - 安装命令：`pkg install termux-api`
-    - 验证：`termux-clipboard-get` 可正常输出内容
-
-    为了防止有些零基础的小白下载到了此程序，我们为您准备了一些教程：
-
     下载termux(链接:(<https://github.com/termux/termux-app/releases>) 并安装，然后运行部署脚本：
 
     ```sh
     bash <(curl -sL https://raw.githubusercontent.com/zhongbai2333/Tomato-Novel-Downloader/main/installer.sh)
     ```
     
+    如果你希望在 TUI 中使用 `Ctrl+V` 从系统剪贴板粘贴，需要安装 Termux API：
+
+    - 安装 App：Termux:API
+    - 安装命令：`pkg install termux-api`
+    - 验证：`termux-clipboard-get` 可正常输出内容
+
     安装完成后，推荐用 Web UI 启动（示例）：
 
     ```sh
@@ -203,3 +141,50 @@ cargo build --release
 项目前期 · 感谢来自QQ用户@终忆的api！
 
 项目前期 · 感谢来自Github用户@jingluopro的api！！
+
+
+End of readme for end user
+==================================
+
+
+## 构建模式（Cargo Features）
+
+本项目提供两个互斥的 feature：`official-api` 与 `no-official-api`（两者不能同时启用）。
+
+### 默认模式：official-api（默认启用）
+
+- 构建（默认就会启用）：
+
+```sh
+cargo build --release
+```
+
+- 行为：
+  - 搜索功能可用（TUI / Web UI / 老 CLI 的搜索入口）。
+  - 段评（EPUB 段评页/资源抓取）可用（取决于配置项）。
+  - 正文获取可通过配置在“官方/第三方”之间切换（`use_official_api`）。
+
+### No-Official-API 模式：no-official-api（Issue #187）
+
+- 构建：
+
+```sh
+# Linux/macOS
+cp Cargo_no_official.toml Cargo.toml
+cargo build --release
+
+# Windows
+copy /Y Cargo_no_official.toml Cargo.toml
+cargo build --release
+```
+
+仓库根目录提供了 `Cargo_no_official.toml`，该文件**完全不引用** `tomato-novel-official-api` 路径依赖，适合无法获取该 crate 的用户直接使用。
+
+- 行为差异（重点）：
+  - **不依赖** `tomato-novel-official-api` crate，可在缺少 Official-API 环境时编译。
+  - 目录与书本信息：使用网页解析（`FanqieWebNetwork`）。
+  - **正文获取：强制第三方模式**（忽略/不使用 `use_official_api=true` 的官方分支）。
+  - 搜索功能：不可用（会返回提示/报错）。
+  - 段评：不可用（会被强制关闭）。
+
+---

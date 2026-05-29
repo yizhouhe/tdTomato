@@ -13,9 +13,9 @@
     先安装termux,可以在play store下载，如果找不到，寻找开源下载termux
     链接:(<https://github.com/termux/termux-app/releases>) 并安装，然后运行部署脚本：
     
-    ```sh
-    bash <(curl -sL https://raw.githubusercontent.com/yizhouhe/tdTomato/main/installer.sh)
-    ``` 
+   ```sh
+   bash <(curl -sL https://raw.githubusercontent.com/yizhouhe/tdTomato/main/installer.sh)
+   ``` 
    如果你希望在 TUI 中使用 `Ctrl+V` 从系统剪贴板粘贴，需要安装 Termux API：
 
    - 安装 App：Termux:API
@@ -38,10 +38,10 @@
    Windows 双击运行`TomatoNovelDownloader-Win64-[当前版本号].exe
 
    Linux 和 MacOS 使用终端运行，可以使用一键部署脚本：
-
-    ```sh
-    bash <(curl -sL https://raw.githubusercontent.com/yizhouhe/tdTomato/main/installer.sh)
-    ```
+   
+   ```sh
+   bash <(curl -sL https://raw.githubusercontent.com/yizhouhe/tdTomato/main/installer.sh)
+   ```
 
 
 

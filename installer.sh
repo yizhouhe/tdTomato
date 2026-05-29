@@ -122,9 +122,9 @@ VERSION="${TAG_NAME#v}"
 log_info "最新版本：${TAG_NAME}（VERSION=${VERSION}）"
 
 echo ""
-echo "请选择下载方式（输入序号，默认 1）："
-echo "  1) 直连 GitHub"
-echo "  2) 使用项目加速源 (https://dl.zhongbai233.com/) 加速"
+#echo "请选择下载方式（输入序号，默认 1）："
+#echo "  1) 直连 GitHub"
+#echo "  2) 使用项目加速源 (https://dl.zhongbai233.com/) 加速"
 #read -r ACCEL_CHOICE
 ACCEL_CHOICE=1
 ACCEL_CHOICE="${ACCEL_CHOICE:-1}"
@@ -154,7 +154,7 @@ case "$PLATFORM" in
                     exit 1
                     ;;
             esac
-            BINARY_NAME="TomatoNovelDownloader-Android_${ANDROID_ARCH}-v${VERSION}"
+            BINARY_NAME="tdTomato-Android_${ANDROID_ARCH}-v${VERSION}"
             log_info "检测到 Termux（架构：${ANDROID_ARCH}），将使用 Android 原生版本。"
         else
             case "$ARCH" in
@@ -288,7 +288,11 @@ elif [ "$PLATFORM" = "Darwin" ]; then
     echo "安装完成，文件位于：${TARGET_BINARY_PATH}"
     echo "运行方式："
     echo "    cd ${INSTALL_DIR}"
+    echo "open http://127.0.0.1:18423"
     echo "    ./${CANONICAL_NAME}"
+    cd "${INSTALL_DIR}"
+    open http://127.0.0.1:18423
+    ./"${CANONICAL_NAME}"
 fi
 
 log_info "全部完成。"

@@ -288,7 +288,7 @@ elif [ "$PLATFORM" = "Darwin" ]; then
     echo "安装完成，文件位于：${TARGET_BINARY_PATH}"
     echo "运行方式："
     echo "    cd ${INSTALL_DIR}"
-    echo "open http://127.0.0.1:18423"
+    echo "    open http://127.0.0.1:18423"
     echo "    ./${CANONICAL_NAME}"
     cd "${INSTALL_DIR}"
     open http://127.0.0.1:18423

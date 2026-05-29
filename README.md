@@ -20,8 +20,8 @@
     如果你希望在 TUI 中使用 `Ctrl+V` 从系统剪贴板粘贴，需要安装 Termux API：
 
     - 安装 App：Termux:API
-    - 安装命令：`pkg install termux-api`
-    - 验证：`termux-clipboard-get` 可正常输出内容
+    - 安装命令：'pkg install termux-api'
+    - 验证：'termux-clipboard-get' 可正常输出内容
 
     安装完成后，推荐用 Web UI 启动（示例）：
 
@@ -31,8 +31,8 @@
 
     然后在浏览器打开：
 
-    - 本机：`http://127.0.0.1:18423/`
-    - 局域网其它设备：`http://<手机的局域网IP>:18423/`
+    - 本机：'http://127.0.0.1:18423/'
+    - 局域网其它设备：'http://<手机的局域网IP>:18423/'
 
 **电脑端该如何运行？**
 

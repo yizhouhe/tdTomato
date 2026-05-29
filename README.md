@@ -35,9 +35,9 @@
 
 **电脑端该如何运行？**
 
-    Windows 双击运行`TomatoNovelDownloader-Win64-[当前版本号].exe
+   Windows 双击运行`TomatoNovelDownloader-Win64-[当前版本号].exe
 
-    Linux 和 MacOS 使用终端运行，可以使用一键部署脚本：
+   Linux 和 MacOS 使用终端运行，可以使用一键部署脚本：
 
     ```sh
     bash <(curl -sL https://raw.githubusercontent.com/yizhouhe/tdTomato/main/installer.sh)

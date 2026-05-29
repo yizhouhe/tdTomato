@@ -4,9 +4,7 @@
 # 功能：
 #   1. 自动通过 GitHub API 获取 Tomato-Novel-Downloader 最新版本
 #   2. 询问用户安装路径（默认脚本执行路径；Termux 下默认 $HOME）
-#   3. 支持 2 种下载方式：
-#        (1) 直连 GitHub
-#        (2) 项目加速源（https://dl.zhongbai233.com/）加速
+#   3. 支持 1 种下载方式:直连 GitHub
 #   4. Termux 环境下生成 run.sh（默认 --server）
 #   5. Linux / macOS (arm64 & Intel x86_64) 下下载对应架构二进制并赋予执行权限
 # 
@@ -49,12 +47,13 @@ fi
 
 DEFAULT_DIR="$(pwd)"
 if $IS_TERMUX; then
-    DEFAULT_DIR="${HOME}"
+    DEFAULT_DIR="${HOME}/tdTomato"
 fi
 
 echo ""
 echo "请输入安装目录（默认：${DEFAULT_DIR}）："
-read -r INPUT_DIR
+#read -r INPUT_DIR
+INPUT_DIR=DEFAULT_DIR
 if [ -z "${INPUT_DIR}" ]; then
     INSTALL_DIR="${DEFAULT_DIR}"
 else
@@ -88,7 +87,8 @@ fi
 if [ ! -d "$INSTALL_DIR" ]; then
     echo ""
     log_warn "目录不存在，是否创建：${INSTALL_DIR} ? (y/N)："
-    read -r CREATE_DIR
+ #   read -r CREATE_DIR
+ CREATE_DIR=y
     case "$CREATE_DIR" in
         y|Y)
             mkdir -p "$INSTALL_DIR"
@@ -125,7 +125,8 @@ echo ""
 echo "请选择下载方式（输入序号，默认 1）："
 echo "  1) 直连 GitHub"
 echo "  2) 使用项目加速源 (https://dl.zhongbai233.com/) 加速"
-read -r ACCEL_CHOICE
+#read -r ACCEL_CHOICE
+ACCEL_CHOICE=1
 ACCEL_CHOICE="${ACCEL_CHOICE:-1}"
 case "$ACCEL_CHOICE" in
     1) ACCEL_METHOD="direct" ;;
@@ -159,16 +160,16 @@ case "$PLATFORM" in
             case "$ARCH" in
                 x86_64|amd64)
                     if $IS_MUSL; then
-                        BINARY_NAME="TomatoNovelDownloader-Linux_musl_amd64-v${VERSION}"
+                        BINARY_NAME="tdTomato-Linux_musl_amd64-v${VERSION}"
                     else
-                        BINARY_NAME="TomatoNovelDownloader-Linux_amd64-v${VERSION}"
+                        BINARY_NAME="tdTomato-Linux_amd64-v${VERSION}"
                     fi
                     ;;
                 aarch64|arm64)
                     if $IS_MUSL; then
-                        BINARY_NAME="TomatoNovelDownloader-Linux_musl_arm64-v${VERSION}"
+                        BINARY_NAME="tdTomato-Linux_musl_arm64-v${VERSION}"
                     else
-                        BINARY_NAME="TomatoNovelDownloader-Linux_arm64-v${VERSION}"
+                        BINARY_NAME="tdTomato-Linux_arm64-v${VERSION}"
                     fi
                     ;;
                 *)
@@ -181,10 +182,10 @@ case "$PLATFORM" in
     Darwin)
         case "$ARCH" in
             arm64)
-                BINARY_NAME="TomatoNovelDownloader-macOS_arm64-v${VERSION}"
+                BINARY_NAME="tdTomato-macOS_arm64-v${VERSION}"
                 ;;
             x86_64)
-                BINARY_NAME="TomatoNovelDownloader-macOS_amd64-v${VERSION}"
+                BINARY_NAME="tdTomato-macOS_amd64-v${VERSION}"
                 ;;
             *)
                 log_error "不支持的 macOS 架构 [${ARCH}]！仅支持 arm64 与 x86_64。"
@@ -198,7 +199,7 @@ case "$PLATFORM" in
         ;;
 esac
 
-ORIGINAL_URL="https://github.com/zhongbai2333/Tomato-Novel-Downloader/releases/download/${TAG_NAME}/${BINARY_NAME}"
+ORIGINAL_URL="https://github.com/yizhouhe/tdTomato/releases/download/${TAG_NAME}/${BINARY_NAME}"
 DOWNLOAD_URL="$ORIGINAL_URL"
 case "$ACCEL_METHOD" in
     direct) ;;

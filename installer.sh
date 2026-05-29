@@ -49,7 +49,7 @@ DEFAULT_DIR="$(pwd)"
 if $IS_TERMUX; then
     DEFAULT_DIR="${HOME}/Downloads/tdTomato"
 fi
-
+DEFAULT_DIR="${HOME}/Downloads/tdTomato"
 echo ""
 echo "请输入安装目录（默认：${DEFAULT_DIR}）："
 #read -r INPUT_DIR

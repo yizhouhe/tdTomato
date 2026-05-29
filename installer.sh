@@ -103,7 +103,7 @@ fi
 
 echo ""
 log_info "正在从 GitHub API 获取最新版本信息..."
-GITHUB_API_URL="https://api.github.com/repos/zhongbai2333/Tomato-Novel-Downloader/releases/latest"
+GITHUB_API_URL="https://api.github.com/repos/yizhouhe/tdTomato/releases/latest"
 if command_exists curl; then
     TAG_NAME=$(curl -s "${GITHUB_API_URL}" | grep -m1 '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 elif command_exists wget; then

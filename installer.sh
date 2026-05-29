@@ -53,7 +53,7 @@ fi
 echo ""
 echo "请输入安装目录（默认：${DEFAULT_DIR}）："
 #read -r INPUT_DIR
-INPUT_DIR=DEFAULT_DIR
+INPUT_DIR="${DEFAULT_DIR}"
 if [ -z "${INPUT_DIR}" ]; then
     INSTALL_DIR="${DEFAULT_DIR}"
 else

@@ -43,15 +43,26 @@
    bash <(curl -sL https://raw.githubusercontent.com/yizhouhe/tdTomato/main/installer.sh)
    ```
 
-
+**服务器端该如何运行？**
 
 - 启动 Web UI：
-
+Windows：把下载文件改名为tdTomato.exe,在任务栏点搜索，搜CMD，点commmand prompt(命令提示符)
     ```sh
-    tdTomato.exe --server
+    cd Downloads    ::进入tdTomato.exe文件所在目录
+    tdTomato.exe --server       ::以服务器模式运行
+    ```
+MacOS：把下载文件改名为tdTomato,在application中的utility中找到终端运行
+    ```sh
+    cd Downloads    ::进入tdTomato文件所在目录
+    ./tdTomato --server       ::以服务器模式运行
+    ```
+Linux：把下载文件改名为tdTomato,在application中的utility中找到终端运行
+    ```sh
+    cd Downloads    ::进入tdTomato文件所在目录
+    ./tdTomato --server       ::以服务器模式运行
     ```
 
-- 监听地址（默认 `127.0.0.1:18423`）：
+- 监听地址（默认服务器和客户端运行在同一台机器 `127.0.0.1:18423`）：
 
     通过环境变量修改监听地址，例如局域网访问：
 
@@ -82,7 +93,10 @@
     ```sh
     TOMATO_WEB_PASSWORD=你的密码
     ```
-   
+**客户端该如何运行？**
+打开浏览器，如果客户端就是服务器，在地址栏中输入'127.0.0.1:18423'
+如果服务器运行在其它机器上，在客户端输入'<服务器的IP地址>：18423'
+
 
 **Web UI 提供的功能（纯 HTML，无需额外前端构建）：**
 

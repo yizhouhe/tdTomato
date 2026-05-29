@@ -9,7 +9,7 @@
 服务器端只支持安装在安卓，Windows, Mac, Linux中，iPhone不支持。
 客户端可以是任何可以上网的设备。安卓，iPhone，Windows, Mac, Linux都可以。iPad, iphone, android tablet,推荐使用google chrome浏览器。生成的ePub文件可以用任何支持ePub的阅读打开。
 
-**手机端仅限安卓设备**
+**手机服务器端只能安装在安卓设备上**
     先安装termux,可以在play store下载，如果找不到，寻找开源下载termux
     链接:(<https://github.com/termux/termux-app/releases>) 并安装，然后运行部署脚本：
     
@@ -25,7 +25,7 @@
    安装完成后，推荐用 Web UI 启动（示例）：
 
    ```bash
-   TOMATO_WEB_ADDR=0.0.0.0:18423 TOMATO_WEB_PASSWORD=你的密码 tomato-novel-downloader --server
+   TOMATO_WEB_ADDR=0.0.0.0:18423 TOMATO_WEB_PASSWORD=你的密码 tdTomato --server
    ```
 
    然后在浏览器打开：
@@ -35,7 +35,7 @@
 
 **电脑端该如何运行？**
 
-   Windows 双击运行`TomatoNovelDownloader-Win64-[当前版本号].exe
+   Windows 在命令行中输入tdTomato-Win64-[当前版本号].exe --server
 
    Linux 和 MacOS 使用终端运行，可以使用一键部署脚本：
    
@@ -48,7 +48,7 @@
 - 启动 Web UI：
 
     ```sh
-    Tomato-Novel-Downloader.exe --server
+    tdTomato.exe --server
     ```
 
 - 监听地址（默认 `127.0.0.1:18423`）：
@@ -74,7 +74,7 @@
 - 密码锁模式（防止陌生人使用）：
 
     ```sh
-    Tomato-Novel-Downloader.exe --server --password 你的密码
+    tdTomato.exe --server --password 你的密码
     ```
 
     或者使用环境变量：

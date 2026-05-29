@@ -13,7 +13,7 @@
     先安装termux,可以在play store下载，如果找不到，寻找开源下载termux
     链接:(<https://github.com/termux/termux-app/releases>) 并安装，然后运行部署脚本：
 
-    ```sh
+    ```bash
     bash <(curl -sL https://raw.githubusercontent.com/yizhouhe/tdTomato/main/installer.sh)
     ```
     
@@ -25,7 +25,7 @@
 
     安装完成后，推荐用 Web UI 启动（示例）：
 
-    ```sh
+    ```bash
     TOMATO_WEB_ADDR=0.0.0.0:18423 TOMATO_WEB_PASSWORD=你的密码 tomato-novel-downloader --server
     ```
 

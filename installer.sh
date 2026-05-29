@@ -292,7 +292,7 @@ elif [ "$PLATFORM" = "Darwin" ]; then
     echo "    ./${CANONICAL_NAME}"
     cd "${INSTALL_DIR}"
     open http://127.0.0.1:18423
-    "./${CANONICAL_NAME} --server"
+    ./"${CANONICAL_NAME}" --server
 fi
 
 log_info "全部完成。"

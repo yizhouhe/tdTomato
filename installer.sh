@@ -47,7 +47,7 @@ fi
 
 DEFAULT_DIR="$(pwd)"
 if $IS_TERMUX; then
-    DEFAULT_DIR="${HOME}/tdTomato"
+    DEFAULT_DIR="${HOME}/Downloads/tdTomato"
 fi
 
 echo ""

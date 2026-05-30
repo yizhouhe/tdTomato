@@ -254,11 +254,11 @@ fi
 
 if $IS_TERMUX; then
     echo ""
-    log_info "生成 run.sh..."
-    RUN_SH_PATH="${INSTALL_DIR}/run.sh"
+    log_info "生成 tomato.sh..."
+    RUN_SH_PATH="${INSTALL_DIR}/tomato.sh"
     cat > "$RUN_SH_PATH" <<EOF
 #!/usr/bin/env bash
-# Termux / MT 管理器环境：运行 Android 原生 TomatoNovelDownloader（默认启动 Web UI 服务器模式）
+# Termux / MT 管理器环境：运行 Android 原生 tdTomato（默认启动 Web UI 服务器模式）
 # 你可以用环境变量控制监听地址与密码锁：
 #   TOMATO_WEB_ADDR=0.0.0.0:18423
 #   TOMATO_WEB_PASSWORD=你的密码
@@ -272,9 +272,12 @@ EOF
     echo ""
     echo "安装完成，请执行："
     echo "    cd ${INSTALL_DIR}"
-    echo "    ./run.sh"
+    echo "    ./tomato.sh"
     echo ""
     echo "提示：如果运行时出现 Permission denied，请把安装目录放在 Termux 目录内（建议 ${HOME}）。"
+    cd "${INSTALL_DIR}"
+    ./tomato.sh
+    
 elif [ "$PLATFORM" = "Linux" ]; then
     echo ""
     log_info "检测到 Linux 环境。"

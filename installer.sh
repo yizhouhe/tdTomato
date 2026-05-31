@@ -320,9 +320,9 @@ export IPADDRESS0=$(ipconfig getifaddr en0)
 export IPADDRESS1=$(ipconfig getifaddr en1)
 echo $IPADDRESS0
 echo $IPADDRESS1
-if [[ $IPADDRESS0>"" ]]; then
+if [[ "$IPADDRESS0">"" ]]; then
     open http://$IPADDRESS0:18423/
-elif [[ $IPADDRESS1>"" ]]; then
+elif [[ "$IPADDRESS1">"" ]]; then
     open http://"$IPADDRESS1":18423/
 else
     open http://127.0.0.1:18423/

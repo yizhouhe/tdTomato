@@ -280,14 +280,30 @@ EOF
     
 elif [ "$PLATFORM" = "Linux" ]; then
     echo ""
+    log_info "生成 tomato.sh..."
+    RUN_SH_PATH="${INSTALL_DIR}/tomato.sh"
+    cat > "$RUN_SH_PATH" <<EOF
+        #!/usr/bin/env bash
+        # 运行 Linux 原生 tdTomato（默认启动 Web UI 服务器模式）
+        # 你可以用环境变量控制监听地址与密码锁：
+        #   TOMATO_WEB_ADDR=0.0.0.0:18423
+        #   TOMATO_WEB_PASSWORD=你的密码
+        SCRIPT_DIR="\$(cd "\$(dirname "\${BASH_SOURCE[0]}")" && pwd)"
+        open "http://127.0.0.1:18423/"
+        ./tomato.sh
+EOF
+    chmod +x "$RUN_SH_PATH"
+    log_info "已生成：${RUN_SH_PATH}"
+
     log_info "检测到 Linux 环境。"
     echo "安装完成，文件位于：${TARGET_BINARY_PATH}"
     echo "运行方式："
     echo "    cd ${INSTALL_DIR}"
     echo "    ./${CANONICAL_NAME} --server"
     cd "${INSTALL_DIR}"
-    open http://127.0.0.1:18423
-    ./"${CANONICAL_NAME}" --server
+   # open http://127.0.0.1:18423
+   # ./"${CANONICAL_NAME}" --server
+    ./tomato.sh
     
 elif [ "$PLATFORM" = "Darwin" ]; then
      echo ""

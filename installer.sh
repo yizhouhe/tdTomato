@@ -265,7 +265,7 @@ if $IS_TERMUX; then
         SCRIPT_DIR="\$(cd "\$(dirname "\${BASH_SOURCE[0]}")" && pwd)"
         termux-open-url "http://127.0.0.1:18423/" >/dev/null 2>&1 || true
         exec "\${SCRIPT_DIR}/${CANONICAL_NAME}" --server "\$@"
-        EOF
+EOF
     chmod +x "$RUN_SH_PATH"
     log_info "已生成：${RUN_SH_PATH}"
 

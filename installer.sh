@@ -296,17 +296,32 @@ EOF
     
 elif [ "$PLATFORM" = "Linux" ]; then
     echo ""
+    log_info "installing net-tools..."
+    pkg install net-tools
     log_info "生成 tomato.sh..."
     RUN_SH_PATH="${INSTALL_DIR}/tomato.sh"
     cat > "$RUN_SH_PATH" <<EOF
-        #!/usr/bin/env bash
-        # 运行 Linux 原生 tdTomato（默认启动 Web UI 服务器模式）
-        # 你可以用环境变量控制监听地址与密码锁：
-        #   TOMATO_WEB_ADDR=0.0.0.0:18423
-        #   TOMATO_WEB_PASSWORD=你的密码
-        cd ${INSTALL_DIR}
-        open http://127.0.0.1:18423/
-        ./"${CANONICAL_NAME}" --server
+#!/usr/bin/env bash
+# 运行 Linux 原生 tdTomato（默认启动 Web UI 服务器模式）
+# 你可以用环境变量控制监听地址与密码锁：
+#   TOMATO_WEB_ADDR=0.0.0.0:18423
+#   TOMATO_WEB_PASSWORD=你的密码
+export IPADDRESS0=\$(ifconfig wlan0 | grep -oP 'inet \K[0-9.]+')
+export IPADDRESS1=\$(ifconfig lo | grep -oP 'inet \K[0-9.]+')
+
+if [[ "\$IPADDRESS0">"" ]]; then
+    open "http://"\$IPADDRESS0":18423/" >/dev/null 2>&1 || true
+    export TOMATO_WEB_ADDR="\$IPADDRESS0":18423
+
+elif [[ "\$IPADDRESS1">"" ]]; then
+    open "http://"\$IPADDRESS1":18423/" >/dev/null 2>&1 || true
+    export TOMATO_WEB_ADDR="\$IPADDRESS1":18423
+else
+    open "http://127.0.0.1:18423/" >/dev/null 2>&1 || true
+    export TOMATO_WEB_ADDR=127.0.0.1:18423
+fi
+cd ${INSTALL_DIR}
+./"${CANONICAL_NAME}" --server
 EOF
     chmod +x "$RUN_SH_PATH"
     log_info "已生成：${RUN_SH_PATH}"
@@ -317,8 +332,6 @@ EOF
     echo "    cd ${INSTALL_DIR}"
     echo "    ./${CANONICAL_NAME} --server"
     cd "${INSTALL_DIR}"
-   # open http://127.0.0.1:18423
-   # ./"${CANONICAL_NAME}" --server
     ./tomato.sh
     
 elif [ "$PLATFORM" = "Darwin" ]; then

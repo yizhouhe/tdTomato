@@ -362,7 +362,8 @@ else
     open http://127.0.0.1:18423/
     export TOMATO_WEB_ADDR=127.0.0.1:18423
 fi
-
+cd \$SCRIPT_DIR
+chmod +x ./tdTomato-macOS_amd64
 ./${CANONICAL_NAME} --server
 EOF
     chmod +x "$RUN_SH_PATH"

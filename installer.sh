@@ -325,7 +325,7 @@ else
     open "http://127.0.0.1:18423/" >/dev/null 2>&1 || true
     export TOMATO_WEB_ADDR=127.0.0.1:18423
 fi
-cd $SCRIPT_DIR
+cd \$SCRIPT_DIR
 chmod +x ./${CANONICAL_NAME}
 ./${CANONICAL_NAME} --server
 EOF

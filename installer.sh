@@ -266,8 +266,8 @@ if $IS_TERMUX; then
 #   TOMATO_WEB_PASSWORD=你的密码
 #   export TOMATO_WEB_PASSWORD=你的密码
 SCRIPT_DIR="\$(cd "\$(dirname "\${BASH_SOURCE[0]}")" && pwd)"
-export IPADDRESS0=\$(ifconfig wlan0 | grep "inet ")
-export IPADDRESS1=\$(ifconfig lo | grep "inet ")
+export IPADDRESS0=\$(ifconfig wlan0 | grep -oP 'inet \K[0-9.]+')
+export IPADDRESS1=\$(ifconfig lo | grep -oP 'inet \K[0-9.]+')
 
 if [[ "\$IPADDRESS0">"" ]]; then
     termux-open-url "http://"\$IPADDRESS0":18423/" >/dev/null 2>&1 || true

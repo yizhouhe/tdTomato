@@ -330,6 +330,7 @@ else
     open http://127.0.0.1:18423/
     TOMATO_WEB_ADDR=127.0.0.1:18423
 fi
+echo \$TOMATO_WEB_ADDR
 ./${CANONICAL_NAME} --server
 EOF
     chmod +x "$RUN_SH_PATH"

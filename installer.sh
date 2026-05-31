@@ -257,12 +257,12 @@ if $IS_TERMUX; then
     log_info "生成 tomato.sh..."
     RUN_SH_PATH="${INSTALL_DIR}/tomato.sh"
     cat > "$RUN_SH_PATH" <<EOF
-        #!/usr/bin/env bash
-        # Termux / MT 管理器环境：运行 Android 原生 tdTomato（默认启动 Web UI 服务器模式）
-        # 你可以用环境变量控制监听地址与密码锁：
-        #   TOMATO_WEB_ADDR=0.0.0.0:18423
-        #   TOMATO_WEB_PASSWORD=你的密码
-        #export TOMATO_WEB_PASSWORD=你的密码
+#!/usr/bin/env bash
+# Termux / MT 管理器环境：运行 Android 原生 tdTomato（默认启动 Web UI 服务器模式）
+# 你可以用环境变量控制监听地址与密码锁：
+#   TOMATO_WEB_ADDR=0.0.0.0:18423
+#   TOMATO_WEB_PASSWORD=你的密码
+#   export TOMATO_WEB_PASSWORD=你的密码
 SCRIPT_DIR="\$(cd "\$(dirname "\${BASH_SOURCE[0]}")" && pwd)"
 export IPADDRESS0=\$(ipconfig getifaddr en0)
 export IPADDRESS1=\$(ipconfig getifaddr en1)
@@ -278,9 +278,7 @@ else
     termux-open-url "http://127.0.0.1:18423/" >/dev/null 2>&1 || true
     export TOMATO_WEB_ADDR=127.0.0.1:18423
 fi
-
-
-        exec "\${SCRIPT_DIR}/${CANONICAL_NAME}" --server "\$@"
+exec "\${SCRIPT_DIR}/${CANONICAL_NAME}" --server "\$@"
 EOF
     chmod +x "$RUN_SH_PATH"
     log_info "已生成：${RUN_SH_PATH}"

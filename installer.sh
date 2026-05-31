@@ -318,6 +318,8 @@ elif [ "$PLATFORM" = "Darwin" ]; then
         SCRIPT_DIR="\$(cd "\$(dirname "\${BASH_SOURCE[0]}")" && pwd)"
         export IPADDRESS0=$(ipconfig getifaddr en0)
         export IPADDRESS1=$(ipconfig getifaddr en1)
+        echo $IPADDRESS0
+        echo $IPADDRESS1
         if [[ ${IPADDRESS0} ]]; then
             open http://${IPADDRESS0}:18423/
         elif [[ ${IPADDRESS1} ]]; then

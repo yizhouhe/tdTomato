@@ -302,7 +302,7 @@ elif [ "$PLATFORM" = "Darwin" ]; then
         SCRIPT_DIR="\$(cd "\$(dirname "\${BASH_SOURCE[0]}")" && pwd)"
         open "http://127.0.0.1:18423/"
         ./tomato.sh
-        EOF
+EOF
     chmod +x "$RUN_SH_PATH"
     log_info "已生成：${RUN_SH_PATH}"
 

@@ -5,14 +5,16 @@
 
 计划抛弃TUI和CLI，只支持Web UI并简化安装步骤。
 
-## 我该如何安装？
+## 我该如何安装使用？
 服务器端只支持安装在安卓，Windows, Mac, Linux中，iPhone不支持。
-客户端可以是任何可以上网的设备。安卓，iPhone，Windows, Mac, Linux都可以。iPad, iphone, android tablet,推荐使用google chrome浏览器。生成的ePub文件可以用任何支持ePub的阅读打开。
+客户端可以是任何可以上网的设备。安卓，iPhone，Windows, Mac, Linux都可以。iPad, iphone, android tablet,推荐使用google chrome浏览器。
+生成的ePub文件可以用任何支持ePub的阅读打开。
 
-**手机服务器端只能安装在安卓设备上**
+目前支持两种便捷安装方试：运行在线部署脚本或下载zip包。
+**安卓设备（最困难）**
     先安装termux,可以在play store下载，
     如果找不到，打开开源下载termux链接:(<https://github.com/termux/termux-app/releases>) 并下载安装，
-    然后运行部署脚本：
+    然后运行在线部署脚本：
     
    ```sh
    bash <(curl -sL https://raw.githubusercontent.com/yizhouhe/tdTomato/main/installer.sh)
@@ -25,74 +27,40 @@
    ./tdTomato.sh
    ```
 
-   然后在浏览器打开：
+   然后在浏览器打开（IP地址以运行脚本提示的为准）：
 
    - 本机：'http://127.0.0.1:18423/'
    - 局域网其它设备：'http://<手机的局域网IP>:18423/'
 
-**电脑端该如何安装？**
+**Windows PC(zip包最容易)**
 
-   Windows 在(<https://github.com/termux/termux-app/releases>) 里下载相应版本到Downloads目录下创建的tdTomato目录中，在命令行中输入：
-   ```sh
-   tdTomato-Win64-[当前版本号].exe --server
-   ···
-   
-    Linux 和 MacOS 使用终端运行，可以使用一键部署脚本：
+   Windows 在(https://github.com/yizhouhe/tdTomato/releases/)>) 里下载相应版本zip包到Downloads目录下，鼠标右键点压缩包，选全部解压。打开解压缩后的文件夹，双击tomato.bat运行。
+
+**Linux PC(在线部署脚本最容易)**   
+    
+    Linux 使用终端运行，可以使用一键部署脚本：
    
    ```sh
    bash <(curl -sL https://raw.githubusercontent.com/yizhouhe/tdTomato/main/installer.sh)
    ```
 
+**MacOS(在线部署脚本最容易)**   
+  MacOS 使用终端运行，可以使用一键部署脚本：
+   
+   ```sh
+   bash <(curl -sL https://raw.githubusercontent.com/yizhouhe/tdTomato/main/installer.sh)
+
+
 **服务器端该如何运行？**
 
 - 启动 Web UI：
-Windows：把下载文件改名为tdTomato.exe,在任务栏点搜索，搜CMD，点commmand prompt(命令提示符)
-    ```sh
-    cd Downloads    ::进入tdTomato.exe文件所在目录
-    tdTomato.exe --server       ::以服务器模式运行
-    ```
-MacOS：把下载文件改名为tdTomato,在application中的utility中找到终端运行
-    ```sh
-    cd Downloads    ::进入tdTomato文件所在目录
-    ./tdTomato.sh       ::以服务器模式运行
-    ```
-Linux：把下载文件改名为tdTomato,在application中的utility中找到终端运行
-    ```sh
-    cd Downloads    ::进入tdTomato文件所在目录
-    ./tdTomato.sh       ::以服务器模式运行
-    ```
+Windows：双击tomato.bat运行。
+   
+MacOS：双击tomato.command运行
 
-- 监听地址（默认服务器和客户端运行在同一台机器 `127.0.0.1:18423`）：
+Linux：右键点击tdTomato.sh，选run as program/以程序方式执行。
 
-    通过环境变量修改监听地址，例如局域网访问：
 
-    ```sh
-    TOMATO_WEB_ADDR=0.0.0.0:18423
-    ```
-
-    IPv6 监听示例（注意 IPv6 需要方括号）：
-
-    ```sh
-    TOMATO_WEB_ADDR=[::]:18423
-    ```
-
-    同时监听多个地址（用逗号或分号分隔），例如同时监听 IPv4 + IPv6：
-
-    ```sh
-    TOMATO_WEB_ADDR=0.0.0.0:18423,[::]:18423
-    ```
-
-- 密码锁模式（防止陌生人使用）：
-
-    ```sh
-    tdTomato.exe --server --password 你的密码
-    ```
-
-    或者使用环境变量：
-
-    ```sh
-    TOMATO_WEB_PASSWORD=你的密码
-    ```
 **客户端该如何运行？**
 打开浏览器，如果客户端就是服务器，在地址栏中输入'127.0.0.1:18423'
 如果服务器运行在其它机器上，在客户端输入'<服务器的IP地址>：18423'

@@ -262,8 +262,24 @@ if $IS_TERMUX; then
         # 你可以用环境变量控制监听地址与密码锁：
         #   TOMATO_WEB_ADDR=0.0.0.0:18423
         #   TOMATO_WEB_PASSWORD=你的密码
-        SCRIPT_DIR="\$(cd "\$(dirname "\${BASH_SOURCE[0]}")" && pwd)"
-        termux-open-url "http://127.0.0.1:18423/" >/dev/null 2>&1 || true
+        #export TOMATO_WEB_PASSWORD=你的密码
+SCRIPT_DIR="\$(cd "\$(dirname "\${BASH_SOURCE[0]}")" && pwd)"
+export IPADDRESS0=\$(ipconfig getifaddr en0)
+export IPADDRESS1=\$(ipconfig getifaddr en1)
+
+if [[ "\$IPADDRESS0">"" ]]; then
+    termux-open-url "http://"\$IPADDRESS0":18423/" >/dev/null 2>&1 || true
+    export TOMATO_WEB_ADDR="\$IPADDRESS0":18423
+
+elif [[ "\$IPADDRESS1">"" ]]; then
+    termux-open-url "http://"\$IPADDRESS1":18423/" >/dev/null 2>&1 || true
+    export TOMATO_WEB_ADDR="\$IPADDRESS1":18423
+else
+    termux-open-url "http://127.0.0.1:18423/" >/dev/null 2>&1 || true
+    export TOMATO_WEB_ADDR=127.0.0.1:18423
+fi
+
+
         exec "\${SCRIPT_DIR}/${CANONICAL_NAME}" --server "\$@"
 EOF
     chmod +x "$RUN_SH_PATH"
@@ -313,12 +329,11 @@ elif [ "$PLATFORM" = "Darwin" ]; then
 #!/usr/bin/env bash
 # 运行 MacOS 原生 tdTomato（默认启动 Web UI 服务器模式）
 # 你可以用环境变量控制监听地址与密码锁：
-#   TOMATO_WEB_PASSWORD=你的密码
+#export TOMATO_WEB_PASSWORD=你的密码
 SCRIPT_DIR="\$(cd "\$(dirname "\${BASH_SOURCE[0]}")" && pwd)"
 export IPADDRESS0=\$(ipconfig getifaddr en0)
 export IPADDRESS1=\$(ipconfig getifaddr en1)
-echo \$IPADDRESS0
-echo \$IPADDRESS1
+
 if [[ "\$IPADDRESS0">"" ]]; then
     open http://\$IPADDRESS0:18423/
     export TOMATO_WEB_ADDR="\$IPADDRESS0":18423
@@ -330,7 +345,7 @@ else
     open http://127.0.0.1:18423/
     export TOMATO_WEB_ADDR=127.0.0.1:18423
 fi
-echo \$TOMATO_WEB_ADDR
+#echo \$TOMATO_WEB_ADDR
 ./${CANONICAL_NAME} --server
 EOF
     chmod +x "$RUN_SH_PATH"

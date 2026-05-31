@@ -321,14 +321,14 @@ echo \$IPADDRESS0
 echo \$IPADDRESS1
 if [[ "\$IPADDRESS0">"" ]]; then
     open http://\$IPADDRESS0:18423/
-    TOMATO_WEB_ADDR="\$IPADDRESS0":18423
+    export TOMATO_WEB_ADDR="\$IPADDRESS0":18423
 
 elif [[ "\$IPADDRESS1">"" ]]; then
     open http://"\$IPADDRESS1":18423/
-    TOMATO_WEB_ADDR="\$IPADDRESS1":18423
+    export TOMATO_WEB_ADDR="\$IPADDRESS1":18423
 else
     open http://127.0.0.1:18423/
-    TOMATO_WEB_ADDR=127.0.0.1:18423
+    export TOMATO_WEB_ADDR=127.0.0.1:18423
 fi
 echo \$TOMATO_WEB_ADDR
 ./${CANONICAL_NAME} --server

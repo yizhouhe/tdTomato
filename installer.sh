@@ -288,7 +288,7 @@ elif [ "$PLATFORM" = "Linux" ]; then
         # 你可以用环境变量控制监听地址与密码锁：
         #   TOMATO_WEB_ADDR=0.0.0.0:18423
         #   TOMATO_WEB_PASSWORD=你的密码
-        SCRIPT_DIR="\$(cd "\$(dirname "\${BASH_SOURCE[0]}")" && pwd)"
+        cd "${INSTALL_DIR}"
         open "http://127.0.0.1:18423/"
         ./tomato.sh
 EOF

@@ -143,14 +143,14 @@ case "$PLATFORM" in
         if $IS_TERMUX; then
             # 检测 Termux 架构：aarch64 → arm64, armv7l → arm32
             case "$ARCH" in
-                aarch64|arm64)
+                aarch64|arm64|armv8l)
                     ANDROID_ARCH="arm64"
                     ;;
                 armv7l|arm)
                     ANDROID_ARCH="arm32"
                     ;;
                 *)
-                    log_error "不支持的 Android 架构 [${ARCH}]！仅支持 aarch64/arm64 与 armv7l/arm。"
+                    log_error "不支持的 Android 架构 [${ARCH}]！仅支持 aarch64/armv8l/arm64 与 armv7l/arm。"
                     exit 1
                     ;;
             esac

@@ -306,8 +306,9 @@ elif [ "$PLATFORM" = "Linux" ]; then
 # 你可以用环境变量控制监听地址与密码锁：
 #   TOMATO_WEB_ADDR=0.0.0.0:18423
 #   TOMATO_WEB_PASSWORD=你的密码
-export IPADDRESS0=\$(ifconfig wlan0 | grep -oP 'inet \K[0-9.]+')
+export IPADDRESS0=\$(ifconfig eth0 | grep -oP 'inet \K[0-9.]+')
 export IPADDRESS1=\$(ifconfig eno1 | grep -oP 'inet \K[0-9.]+')
+export IPADDRESS2=\$(ifconfig wlan0 | grep -oP 'inet \K[0-9.]+')
 
 if [[ "\$IPADDRESS0">"" ]]; then
     open "http://"\$IPADDRESS0":18423/" >/dev/null 2>&1 || true
@@ -316,6 +317,9 @@ if [[ "\$IPADDRESS0">"" ]]; then
 elif [[ "\$IPADDRESS1">"" ]]; then
     open "http://"\$IPADDRESS1":18423/" >/dev/null 2>&1 || true
     export TOMATO_WEB_ADDR="\$IPADDRESS1":18423
+elif [[ "\$IPADDRESS2">"" ]]; then
+    open "http://"\$IPADDRESS2":18423/" >/dev/null 2>&1 || true
+    export TOMATO_WEB_ADDR="\$IPADDRESS2":18423
 else
     open "http://127.0.0.1:18423/" >/dev/null 2>&1 || true
     export TOMATO_WEB_ADDR=127.0.0.1:18423

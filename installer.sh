@@ -297,7 +297,7 @@ EOF
 elif [ "$PLATFORM" = "Linux" ]; then
     echo ""
     log_info "installing net-tools..."
-    pkg install net-tools
+    sudo apt install net-tools
     log_info "生成 tomato.sh..."
     RUN_SH_PATH="${INSTALL_DIR}/tomato.sh"
     cat > "$RUN_SH_PATH" <<EOF

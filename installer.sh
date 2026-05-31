@@ -340,8 +340,8 @@ EOF
     
 elif [ "$PLATFORM" = "Darwin" ]; then
      echo ""
-    log_info "生成 tomato.sh..."
-    RUN_SH_PATH="${INSTALL_DIR}/tomato.sh"
+    log_info "生成 tomato.command..."
+    RUN_SH_PATH="${INSTALL_DIR}/tomato.command"
     cat > "$RUN_SH_PATH" <<EOF
 #!/usr/bin/env bash
 # 运行 MacOS 原生 tdTomato（默认启动 Web UI 服务器模式）
@@ -362,7 +362,7 @@ else
     open http://127.0.0.1:18423/
     export TOMATO_WEB_ADDR=127.0.0.1:18423
 fi
-#echo \$TOMATO_WEB_ADDR
+
 ./${CANONICAL_NAME} --server
 EOF
     chmod +x "$RUN_SH_PATH"
@@ -373,9 +373,9 @@ EOF
     echo "安装完成，文件位于：${TARGET_BINARY_PATH}"
     echo "运行方式："
     echo "cd ${INSTALL_DIR}"
-    echo "./tomato.sh"
+    echo "./tomato.command"
     cd "${INSTALL_DIR}"
-    ./tomato.sh
+    ./tomato.command
 fi
 
 log_info "全部完成。"

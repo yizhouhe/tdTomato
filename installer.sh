@@ -307,7 +307,7 @@ elif [ "$PLATFORM" = "Linux" ]; then
 #   TOMATO_WEB_ADDR=0.0.0.0:18423
 #   TOMATO_WEB_PASSWORD=你的密码
 export IPADDRESS0=\$(ifconfig wlan0 | grep -oP 'inet \K[0-9.]+')
-export IPADDRESS1=\$(ifconfig lo | grep -oP 'inet \K[0-9.]+')
+export IPADDRESS1=\$(ifconfig eno1 | grep -oP 'inet \K[0-9.]+')
 
 if [[ "\$IPADDRESS0">"" ]]; then
     open "http://"\$IPADDRESS0":18423/" >/dev/null 2>&1 || true

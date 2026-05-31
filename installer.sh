@@ -285,9 +285,9 @@ elif [ "$PLATFORM" = "Linux" ]; then
     echo "运行方式："
     echo "    cd ${INSTALL_DIR}"
     echo "    ./${CANONICAL_NAME} --server"
-    cd "${INSTALL_DIR}"
+    "cd ${INSTALL_DIR}"
     open http://127.0.0.1:18423
-    ./"${CANONICAL_NAME} --server"
+    ./"${CANONICAL_NAME}" --server
     
 elif [ "$PLATFORM" = "Darwin" ]; then
      echo ""

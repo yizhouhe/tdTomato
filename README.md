@@ -5,27 +5,24 @@
 
 计划抛弃TUI和CLI，只支持Web UI并简化安装步骤。
 
-## 我该如何使用？
+## 我该如何安装？
 服务器端只支持安装在安卓，Windows, Mac, Linux中，iPhone不支持。
 客户端可以是任何可以上网的设备。安卓，iPhone，Windows, Mac, Linux都可以。iPad, iphone, android tablet,推荐使用google chrome浏览器。生成的ePub文件可以用任何支持ePub的阅读打开。
 
 **手机服务器端只能安装在安卓设备上**
-    先安装termux,可以在play store下载，如果找不到，寻找开源下载termux
-    链接:(<https://github.com/termux/termux-app/releases>) 并安装，然后运行部署脚本：
+    先安装termux,可以在play store下载，
+    如果找不到，打开开源下载termux链接:(<https://github.com/termux/termux-app/releases>) 并下载安装，
+    然后运行部署脚本：
     
    ```sh
    bash <(curl -sL https://raw.githubusercontent.com/yizhouhe/tdTomato/main/installer.sh)
    ``` 
-   如果你希望在 TUI 中使用 `Ctrl+V` 从系统剪贴板粘贴，需要安装 Termux API：
 
-   - 安装 App：Termux:API
-   - 安装命令：'pkg install termux-api'
-   - 验证：'termux-clipboard-get' 可正常输出内容
-
-   安装完成后，推荐用 Web UI 启动（示例）：
+   安装完成后，首次会自动运行并打开浏览器。下次运行所需的命令也会显示在终端里(cd 后面的目录名不同机器可能不一样，以安装脚本提示的为准)：
 
    ```bash
-   TOMATO_WEB_ADDR=0.0.0.0:18423 TOMATO_WEB_PASSWORD=你的密码 tdTomato --server
+   cd /data/data/com.termux/files/home/Downloads/tdTomato
+   ./tdTomato.sh
    ```
 
    然后在浏览器打开：
@@ -33,11 +30,14 @@
    - 本机：'http://127.0.0.1:18423/'
    - 局域网其它设备：'http://<手机的局域网IP>:18423/'
 
-**电脑端该如何运行？**
+**电脑端该如何安装？**
 
-   Windows 在命令行中输入tdTomato-Win64-[当前版本号].exe --server
-
-   Linux 和 MacOS 使用终端运行，可以使用一键部署脚本：
+   Windows 在(<https://github.com/termux/termux-app/releases>) 里下载相应版本到Downloads目录下创建的tdTomato目录中，在命令行中输入：
+   ```sh
+   tdTomato-Win64-[当前版本号].exe --server
+   ···
+   
+    Linux 和 MacOS 使用终端运行，可以使用一键部署脚本：
    
    ```sh
    bash <(curl -sL https://raw.githubusercontent.com/yizhouhe/tdTomato/main/installer.sh)
@@ -54,12 +54,12 @@ Windows：把下载文件改名为tdTomato.exe,在任务栏点搜索，搜CMD，
 MacOS：把下载文件改名为tdTomato,在application中的utility中找到终端运行
     ```sh
     cd Downloads    ::进入tdTomato文件所在目录
-    ./tdTomato --server       ::以服务器模式运行
+    ./tdTomato.sh       ::以服务器模式运行
     ```
 Linux：把下载文件改名为tdTomato,在application中的utility中找到终端运行
     ```sh
     cd Downloads    ::进入tdTomato文件所在目录
-    ./tdTomato --server       ::以服务器模式运行
+    ./tdTomato.sh       ::以服务器模式运行
     ```
 
 - 监听地址（默认服务器和客户端运行在同一台机器 `127.0.0.1:18423`）：

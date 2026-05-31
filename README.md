@@ -49,8 +49,7 @@
    
    ```sh
    bash <(curl -sL https://raw.githubusercontent.com/yizhouhe/tdTomato/main/installer.sh)
-···
-
+```
 **服务器端该如何运行？**
 
 - 启动 Web UI：
